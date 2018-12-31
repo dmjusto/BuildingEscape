@@ -19,7 +19,7 @@ void UPositionReport::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// ...
+    UE_LOG(LogTemp, Warning, TEXT("You did it, Position Report!!!"));
 	
 }
 
