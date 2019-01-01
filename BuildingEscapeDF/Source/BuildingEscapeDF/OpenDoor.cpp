@@ -14,15 +14,18 @@ UOpenDoor::UOpenDoor()
 }
 
 
+static void OpenDoor(const UOpenDoor &object)
+{
+    AActor* Owner = object.GetOwner();
+    FRotator newRotation = FRotator(0.0f, -60.0f, 0.0f);
+    
+    Owner->SetActorRotation(newRotation);
+}
+
 // Called when the game starts
 void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
-
-    AActor* Owner = GetOwner();
-    FRotator newRotation = FRotator(0.0f, -60.0f, 0.0f);
-    
-    Owner->SetActorRotation(newRotation);
 	
 }
 
@@ -32,6 +35,9 @@ void UOpenDoor::TickComponent(float DeltaTime, ELevelTick TickType, FActorCompon
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
-	// ...
+    if(pressurePlate && pressurePlate->IsOverlappingActor(actorThatOpens))
+    {
+        OpenDoor(*this);
+    }
 }
 
